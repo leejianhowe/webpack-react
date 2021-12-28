@@ -1,12 +1,11 @@
 {
-  "name": "dashboard",
+  "name": "template-react-webpack",
   "version": "1.0.0",
-  "description": "dashboard for admin",
-  "main": "index.js",
+  "description": "webpack react eslint typescript template",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.config.ts",
-    "start": "webpack serve --open --config webpack.config.ts"
+    "start": "webpack serve --open --config webpack.dev.config.ts"
   },
   "author": "",
   "license": "ISC",
