@@ -1,7 +1,9 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-module.exports = {
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ESLintPlugin from "eslint-webpack-plugin";
+
+const config = {
   // tells app to be bundled for production or development
   mode: "development",
   entry: "./src/index.tsx",
@@ -9,9 +11,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
-    // tells webpack to wait for typecheck
+    // adds type checking into the webpack process
+    // throws type error if found
     new ForkTsCheckerWebpackPlugin({
       async: false,
+    }),
+    // Adding linting into the webpack process
+    // throws linting error if found
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
     }),
   ],
   devtool: "inline-source-map",
@@ -24,8 +32,13 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  /**
+   * The resolve.extensions field tells Webpack what file types to
+   * look for in which order during module resolution. We need to tell it to
+   * look for TypeScript files as well as JavaScript files.
+   */
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", "jsx"],
   },
   module: {
     rules: [
@@ -76,3 +89,5 @@ module.exports = {
     ],
   },
 };
+
+export default config

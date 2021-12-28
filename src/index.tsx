@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Button from "./button";
-import print from "./print";
+import Button from "./Button";
+// import print from "./print";
 
 export default function App() {
   return (
